@@ -23,4 +23,10 @@ export class Event {
     cascade: ['insert', 'update'],
   })
   attendees: Attendee[];
+
+  attendeeCount?: number;
+
+  attendeeRejected?: number;
+  attendeeMaybe?: number;
+  attendeeAccepted?: number;
 }
