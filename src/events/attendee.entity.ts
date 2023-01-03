@@ -1,4 +1,5 @@
 import { Expose } from 'class-transformer';
+import { User } from 'src/auth/user.entity';
 import {
   Column,
   Entity,
@@ -38,4 +39,10 @@ export class Attendee {
   })
   @Expose()
   answer: AttendeeAnswerEnum;
+
+  @ManyToOne(() => User, (user) => user.attended)
+  user: User;
+
+  @Column()
+  userId: number;
 }
