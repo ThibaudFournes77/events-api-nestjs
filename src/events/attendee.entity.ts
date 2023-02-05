@@ -26,12 +26,13 @@ export class Attendee {
   name: string;
 
   @ManyToOne(() => Event, (event) => event.attendees, {
-    nullable: false,
+    nullable: true,
   })
-  @JoinColumn({
-    name: 'event_id',
-  })
+  @JoinColumn()
   event: Event;
+
+  @Column({ name: 'event_id' })
+  eventId: number;
 
   @Column('enum', {
     enum: AttendeeAnswerEnum,
