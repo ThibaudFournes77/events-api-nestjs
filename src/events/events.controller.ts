@@ -27,9 +27,9 @@ import { Event } from './event.entity';
 import { EventsService } from './events.service';
 import { UpdateEventDto } from './input/update-event.dto';
 import { ListEvents } from './input/list.events';
-import { CurrentUser } from 'src/auth/current-user.decorator';
-import { User } from 'src/auth/user.entity';
-import { AuthGuardJwt } from 'src/auth/auth-guard.jwt';
+import { CurrentUser } from './../auth/current-user.decorator';
+import { User } from './../auth/user.entity';
+import { AuthGuardJwt } from './../auth/auth-guard.jwt';
 
 @Controller('/events')
 @SerializeOptions({ strategy: 'excludeAll' })

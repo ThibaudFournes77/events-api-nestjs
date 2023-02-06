@@ -13,8 +13,8 @@ import {
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
-import { CurrentUser } from 'src/auth/current-user.decorator';
-import { User } from 'src/auth/user.entity';
+import { CurrentUser } from './../auth/current-user.decorator';
+import { User } from './../auth/user.entity';
 import { AuthGuardJwt } from './../auth/auth-guard.jwt';
 import { AttendeesService } from './attendees.service';
 import { EventsService } from './events.service';

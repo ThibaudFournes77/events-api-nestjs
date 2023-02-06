@@ -1,7 +1,7 @@
 import { Controller, Post } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Profile } from 'src/auth/profile.entity';
-import { User } from 'src/auth/user.entity';
+import { Profile } from './../auth/profile.entity';
+import { User } from './../auth/user.entity';
 import { Repository } from 'typeorm';
 import { Subject } from './subject.entity';
 import { Teacher } from './teacher.entity';
