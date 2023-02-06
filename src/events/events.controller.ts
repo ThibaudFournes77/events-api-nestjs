@@ -35,10 +35,10 @@ import { AuthGuardJwt } from './../auth/auth-guard.jwt';
 @SerializeOptions({ strategy: 'excludeAll' })
 export class EventsController {
   constructor(
-    @InjectRepository(Event)
-    private readonly repository: Repository<Event>,
-    @InjectRepository(Attendee)
-    private readonly attendeeRepository: Repository<Attendee>,
+    // @InjectRepository(Event)
+    // private readonly repository: Repository<Event>,
+    // @InjectRepository(Attendee)
+    // private readonly attendeeRepository: Repository<Attendee>,
     private readonly eventsService: EventsService,
   ) {}
 
@@ -60,48 +60,48 @@ export class EventsController {
     return events;
   }
 
-  @Get('/practice')
-  async practice() {
-    return await this.repository.find({
-      select: ['id', 'name', 'when'],
-      where: [
-        {
-          id: MoreThan(3),
-          when: MoreThan(new Date('2021-02-12T13:00:00')),
-        },
-        {
-          description: Like('%meet%'),
-        },
-      ],
-      take: 2,
-      order: {
-        id: 'ASC',
-      },
-    });
-  }
+  // @Get('/practice')
+  // async practice() {
+  //   return await this.repository.find({
+  //     select: ['id', 'name', 'when'],
+  //     where: [
+  //       {
+  //         id: MoreThan(3),
+  //         when: MoreThan(new Date('2021-02-12T13:00:00')),
+  //       },
+  //       {
+  //         description: Like('%meet%'),
+  //       },
+  //     ],
+  //     take: 2,
+  //     order: {
+  //       id: 'ASC',
+  //     },
+  //   });
+  // }
 
-  @Get('practice2')
-  async practice2() {
-    return await this.repository.findOne({
-      where: { id: 1 },
-      relations: ['attendees'],
-    });
-  }
+  // @Get('practice2')
+  // async practice2() {
+  //   return await this.repository.findOne({
+  //     where: { id: 1 },
+  //     relations: ['attendees'],
+  //   });
+  // }
 
-  @Get('practice3')
-  async practice3() {
-    // const event = await this.repository.findOne(1);
-    const event = new Event();
-    event.id = 1;
+  // @Get('practice3')
+  // async practice3() {
+  //   // const event = await this.repository.findOne(1);
+  //   const event = new Event();
+  //   event.id = 1;
 
-    const attendee = new Attendee();
-    attendee.user.username = 'Using cascade';
-    attendee.event = event;
+  //   const attendee = new Attendee();
+  //   attendee.user.username = 'Using cascade';
+  //   attendee.event = event;
 
-    await this.attendeeRepository.save(attendee);
+  //   await this.attendeeRepository.save(attendee);
 
-    return event;
-  }
+  //   return event;
+  // }
 
   @Get(':id')
   @UseInterceptors(ClassSerializerInterceptor)
@@ -143,11 +143,7 @@ export class EventsController {
       );
     }
 
-    return await this.repository.save({
-      ...event,
-      ...input,
-      when: input.when ? new Date(input.when) : event.when,
-    });
+    return await this.eventsService.updateEvent(event, input);
   }
 
   @Delete(':id')
